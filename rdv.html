@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitar - Rendez-vous</title>
+    <link rel="stylesheet" href="test.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        
+        body{background: url('rdv.jpg') no-repeat center center fixed;
+            /* Image de fond */
+            background-size: cover;}
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="navdiv">
+            <div class="logo">
+                <a href="home01.html">Hospitar</a>
+            </div>
+            <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+            <ul>
+                <li><a href="home01.html">Accueil</a></li>
+                <li><a href="analyse01.html">Analyses</a></li>
+                <li><a href="donation01.html">Don</a></li>
+                <li><a href="faq01.html">FAQs</a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <section class="container">
+        <h3>Remplir cette formulaire pour prendre un rendez-vous</h3>
+        <form action="/submit" method="POST">
+            <label for="Nom">Nom</label>
+            <input type="text" id="Nom" name="Nom" placeholder="Entrez votre nom..." />
+
+            <label for="Prenom">Prénom</label>
+            <input type="text" id="Prenom" name="Prenom" placeholder="Entrez votre prénom..." />
+
+            <label for="date_naissance">Date de naissance</label>
+            <input type="date" id="date_naissance" name="date_naissance" />
+
+            <label for="num_carnet">Numéro de carnet de traitement</label>
+            <input type="text" id="num_carnet" name="num_carnet" placeholder="Entrer Votre Numéro de Carnet.." />
+
+            <label for="specialty" >Le service Medical</label>
+            <input type="text" id="specialty" name="specialty" readonly >
+               
+           
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="Entrer Votre Email.." required />
+            <label for="desc">Description</label>
+            <input type="text" id="desc" name="desc" placeholder="Ajouter une Description.." />
+            <button type="submit">Envoyer</button>
+            
+        </form>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Hospitar - Tous droits réservés.</p>
+    </footer>
+    <script>
+         // Extract the specialty from the URL
+         const urlParams = new URLSearchParams(window.location.search);
+        const specialty = urlParams.get('specialty');
+
+        if (specialty) {
+            document.getElementById('specialty').value = specialty;
+        }
+    </script>
+</body>
+</html>

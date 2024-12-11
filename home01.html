@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitar - Accueil</title>
+    <link rel="stylesheet" href="test.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300..900&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+      
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="navdiv">
+            <div class="logo">
+                <a href="home01.html">Hospitar</a>
+            </div>
+            <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+            <ul>
+                <li><a href="home01.html">Accueil</a></li>
+                <li><a href="analyse01.html">Analyses</a></li>
+                <li><a href="donation01.html">Don</a></li>
+                <li><a href="faq01.html">FAQs</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="container">
+            <h1>Trouver un Médecin Près de Chez Vous</h1>
+            <p>Veuillez sélectionner la spécialité médicale et l'emplacement pour trouver l'hôpital le plus proche et planifier votre rendez-vous.</p>
+            <form id="form1" action="#">
+                <label for="specialty">Spécialité médicale :</label>
+                <select id="specialty" name="specialty" required>
+                    <option value="Médecine générale" selected>Médecine générale</option>
+                    <option value="Pédiatrie">Pédiatrie</option>
+                    <option value="Cardiologie">Cardiologie</option>
+                    <option value="Neurologie">Neurologie</option>
+                    <option value="Gastro-entérologie">Gastro-entérologie</option>
+                    <option value="Dermatologie">Dermatologie</option>
+                    <option value="Psychiatrie">Psychiatrie</option>
+                    <option value="Gynécologie">Gynécologie</option>
+                </select>
+
+                <label for="city">Emplacement :</label>
+                <select id="city" name="localisation" required>
+                    <option value="Sousse" selected>Sousse</option>
+                    <option value="Hammam Sousse">Hammam Sousse</option>
+                    <option value="Akouda">Akouda</option>
+                    <option value="Kalaa Kebira">Kalaa Kebira</option>
+                    <option value="Msaken">Msaken</option>
+                </select>
+
+                <button type="submit" >Trouver</button>
+            </form>
+            <div id="message" class="message"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Hospitar. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Liste des hôpitaux par ville
+const hospitals = {
+    "Sousse": "Hôpital Farhat Hached",
+    "Hammam Sousse": "Clinique Les Oliviers",
+    "Akouda": "Centre Médical Akouda",
+    "Kalaa Kebira": "Hôpital Régional Kalaa Kebira",
+    "Msaken": "Hôpital Régional Msaken"
+};
+
+// Récupérer le formulaire et les éléments nécessaires
+const form = document.getElementById('form1'); // Correctly select the form by its ID
+const messageDiv = document.getElementById('message');
+
+// Gestionnaire d'événement pour la soumission du formulaire
+form.addEventListener('submit', function (e) {
+    e.preventDefault(); // Empêcher le rechargement de la page
+
+    // Récupérer la valeur sélectionnée
+    const city = document.getElementById('city').value;
+
+    // Vérifier si une ville est sélectionnée
+    if (city && hospitals[city]) {
+        afficherMessage(`✔️ L'hôpital le plus proche de ${city} est : ${hospitals[city]}.`, "success");
+        setTimeout(() => {
+            const specialty = document.getElementById("specialty").value;
+            window.location.href = `rdv.html?specialty=${encodeURIComponent(specialty)}`;
+        }, 3000); // Delay in milliseconds
+        navigateToForm()
+    } else {
+        afficherMessage("❌ Aucun hôpital trouvé pour cette ville ou aucune ville sélectionnée.", "error");
+    }
+});
+
+// Fonction pour afficher un message
+function afficherMessage(texte, type) {
+    messageDiv.textContent = texte;
+    messageDiv.className = `message ${type}`;
+    messageDiv.style.display = "block";
+}
+
+    
+    function toggleMenu() {
+        const menu = document.querySelector('.navdiv ul');
+        menu.classList.toggle('active');
+    }
+    
+    
+    </script>
+</body>
+</html>

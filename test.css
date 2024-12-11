@@ -1,0 +1,237 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('hosptar.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    background: #35848a;
+    font-family: 'Times New Roman';
+    font-weight: bold;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    
+}
+
+.navdiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo a {
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;
+    font-family: 'Pacifico', cursive;
+    text-shadow: 0 0 10px #ffffff;
+}
+
+.logo a:hover {
+    font-size:27px ;
+    text-shadow: 0 0 10px #ffffff;
+}
+
+.navdiv ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navdiv li a {
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    text-shadow: 0 0 10px #ffffff;
+}
+
+.navdiv li a:hover {
+    font-size:20px;
+    text-shadow: 0 0 15px #ffffff;
+}
+
+/* Main Section */
+main {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+    
+}
+
+.container {
+    background:#aad8ce;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #04323a;
+}
+
+p {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+    text-align: left;
+    
+}
+input[type="text"], input[type="date"],
+input[type="email"],input[type="tel"] {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+input[type="text"]:focus,  input[type="date"]:focus,
+input[type="email"]:focus, input[type="tel"]:focus,input[type="text"]:hover,  input[type="date"]:hover,
+input[type="email"]:hover, input[type="tel"]:hover{
+    border-color: #2575fc;
+    outline: none;
+    box-shadow: 0 0 8px rgba(37, 117, 252, 0.3);
+}
+
+select, button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+select:focus , select:hover{
+    border-color: #2575fc;
+    box-shadow: 0 0 8px rgba(37, 117, 252, 0.3);
+}
+
+button {
+    background: linear-gradient(135deg, #c9570c, #68571e);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #35848a;
+    color: #fff;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* For smaller screens */
+.menu-toggle{
+    display: none;
+}
+@media (max-width: 780px) {
+    .navdiv {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        
+    }
+
+    .navdiv ul {
+        display: none;  /*Hide the menu initially */
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        background: #35848a;
+        padding: 10px 0;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .navdiv ul.active {
+        display: flex; /* Show the menu when active */
+    }
+
+    .navdiv ul li {
+        display: block;
+        margin-right: 0;
+        text-align: left;
+    }
+
+    .navdiv .logo {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navdiv .menu-toggle {
+        display: block;
+        cursor: pointer;
+        color: white;
+        font-size: 20px;
+        margin-left: auto;
+        margin-right: 20px;
+    }
+}
+.message {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 10px;
+    display: none; /* Cache le message par défaut */
+}
+
+.message.success {
+    background: #d4edda;
+    color: #155724;
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.message.error {
+    background: #f8d7da;
+    color: #721c24;
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+

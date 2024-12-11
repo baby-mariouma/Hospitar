@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitar - Donations et Demandes</title>
+    <link rel="stylesheet" href="test.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body{background: url('th.jpg') no-repeat center center fixed;
+            /* Image de fond */
+            background-size: cover;}
+            .background-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit; /* Utilise le même arrière-plan */
+            filter: blur(5px); /* Applique le flou */
+            z-index: -1; /* Place derrière le contenu */}
+        .post-form, .comment-form {
+            margin-bottom: 20px;
+            
+        }
+        
+        textarea, input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        
+        .close-btn {
+            
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+            float: right;
+        }
+        
+        .post {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #d8d6d6;
+            border-radius: 5px;
+        }
+        .post-header .post-author {
+            font-weight: bold;
+            color: #1da1f2;
+        }
+        .post-header .post-phone {
+            font-size: 0.9em;
+            color: #555;
+        }
+        .comments {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+        
+        .comment {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #e0e7e394;
+            
+        }
+        .comment .comment-author {
+            text-align: left;  
+        }
+        
+        
+        .reply-form {
+            display: none;
+            margin-top: 10px;
+        }
+        #formContainer{
+            display:none;
+        }
+        .td{
+            text-align: left;
+        }
+        .comment-reply{
+            text-align: left;
+            
+        }
+       
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            button {
+                width: 100%;
+            }
+        }
+        /* General styles for the navbar */
+
+
+/* Form container styles */
+.showForm {
+    position: relative; /* Relative to position the form correctly */
+    padding-right: 100px;
+}
+
+#formContainer {
+    display: none; /* Initially hide the form */
+    position: absolute; /* Position the form absolutely within .showForm */
+    top: 100%; /* Display the form just below the navbar */
+    left: 0;
+    width: 300px; /* Adjust the width as needed */
+    background-color: white; /* White background for the form */
+    border: 1px solid #ccc;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow for better visibility */
+    z-index: 999; /* Ensure it appears above other content */
+}
+
+/* Close button alignment */
+#formContainer .close-btn {
+    display: block;
+    margin-left: auto;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #ff0000;
+    cursor: pointer;
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="navdiv">
+            <div class="logo">
+                <a href="home.html">Hospitar</a>
+            </div>
+            <span class="menu-toggle" onclick="toggleMenu()">☰</span>
+            <ul>
+                <li><a href="home01.html">Accueil</a></li>
+                <li><a href="analyse01.html">Analyses</a></li>
+                <li><a href="donation01.html">Don</a></li>
+                <li><a href="faq01.html">FAQs</a></li>
+            </ul>
+            <div class="showForm">
+                <button id="showForm">Publier une Annonce</button>
+                <form id="formContainer">
+                    <button type="button" class="close-btn" id="closeForm">X</button>
+                    <label for="type">Type d'Annonce:</label>
+                    <select id="type" name="type" required>
+                        <option value="">--Sélectionnez--</option>
+                        <option value="donation">Don</option>
+                        <option value="request">Demande</option>
+                    </select>
+                    <label for="name">Nom:</label>
+                    <input type="text" id="name" name="name" placeholder="Entrez votre nom..." required>
+                    <label for="phone">Numéro de Téléphone:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Entrez votre numéro de téléphone..." required>
+                    <label for="details">Détails:</label>
+                    <textarea id="details" name="details" rows="3" placeholder="Décrivez ce que vous donnez ou demandez..." required></textarea>
+                    <button type="submit">Publier</button>
+                </form>
+            </div>
+        </div>
+       
+    </header>
+
+    <main>
+    <section class="container">
+        <h1>Donations et Demandes</h1>
+
+        
+        <div id="posts"></div>
+    </section>
+</main>
+<div class="background-blur"></div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Hospitar - Tous droits réservés.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const showFormButton = document.getElementById('showForm');
+        const closeFormButton = document.getElementById('closeForm');
+        const formContainer = document.getElementById('formContainer');
+        const postsContainer = document.getElementById('posts');
+        let posts = JSON.parse(localStorage.getItem('donationPosts')) || [];
+
+        // Show the form
+document.getElementById('showForm').addEventListener('click', function () {
+    document.getElementById('formContainer').style.display = 'block';
+});
+
+// Close the form
+document.getElementById('closeForm').addEventListener('click', function () {
+    document.getElementById('formContainer').style.display = 'none';
+});
+
+
+        // Handle form submission
+        formContainer.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const type = formContainer.type.value;
+            const name = formContainer.name.value.trim();
+            const phone = formContainer.phone.value.trim();
+            const details = formContainer.details.value.trim();
+
+            if (type === "" || name === "" || phone === "" || details === "") {
+                alert('Veuillez remplir tous les champs requis.');
+                return;
+            }
+
+            const post = {
+                type,
+                name,
+                phone,
+                details,
+                comments: []
+            };
+            posts.push(post);
+            localStorage.setItem('donationPosts', JSON.stringify(posts));
+            displayPosts();
+            formContainer.reset();
+            formContainer.style.display = 'none';
+        });
+
+        // Display all posts
+        function displayPosts() {
+            postsContainer.innerHTML = '';
+            posts.forEach((post, index) => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('post');
+                
+                // Determine the type display
+                const typeDisplay = post.type === 'donation' ? 'Don' : 'Demande';
+
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <div class="post-author">${post.name}</div>
+                        <div class="post-phone">${post.phone}</div>
+                    </div>
+                    <p class="td"><strong>Type:</strong> ${typeDisplay}</p>
+                    <p class="td"><strong>Détails:</strong> ${post.details}</p>
+                    <button id="reply-button" onclick="showReplyForm(${index})">Répondre</button>
+                    <form class="reply-form" id="reply-form-${index}">
+                        <button type="button" class="close-btn" onclick="hideReplyForm(${index})">X</button>
+                        <label for="reply-name-${index}">Nom:</label>
+                        <input type="text" id="reply-name-${index}" name="reply-name" placeholder="Entrez votre nom..." required>
+                        <label for="reply-message-${index}">Votre Réponse:</label>
+                        <textarea id="reply-message-${index}" name="reply-message" rows="2" placeholder="Écrivez votre commentaire..." required></textarea>
+                        <button type="submit">Envoyer</button>
+                    </form>
+                    <div class="comments" id="comments-${index}"></div>
+                `;
+                postsContainer.appendChild(postElement);
+
+                // Handle reply form submission
+                document.getElementById(`reply-form-${index}`).addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    const replyName = document.getElementById(`reply-name-${index}`).value.trim();
+                    const replyMessage = document.getElementById(`reply-message-${index}`).value.trim();
+
+                    if (replyName === "" || replyMessage === "") {
+                        alert('Veuillez remplir tous les champs requis pour le commentaire.');
+                        return;
+                    }
+
+                    const reply = {
+                        replyName,
+                        replyMessage
+                    };
+                    posts[index].comments.push(reply);
+                    localStorage.setItem('donationPosts', JSON.stringify(posts));
+                    displayPosts();
+                });
+
+                // Display existing comments
+                displayReplies(index);
+            });
+        }
+
+        // Show reply form
+        function showReplyForm(index) {
+            const replyForm = document.getElementById(`reply-form-${index}`);
+            replyForm.style.display = 'block';
+        }
+
+        // Hide reply form
+        function hideReplyForm(index) {
+            const replyForm = document.getElementById(`reply-form-${index}`);
+            replyForm.reset();
+            replyForm.style.display = 'none';
+        }
+
+        // Display comments for a post
+        function displayReplies(index) {
+            const repliesContainer = document.getElementById(`comments-${index}`);
+            repliesContainer.innerHTML = '';
+            posts[index].comments.forEach(reply => {
+                const replyElement = document.createElement('div');
+                replyElement.classList.add('comment');
+                replyElement.innerHTML = `
+                    <p class="comment-author"><strong style="font-weight: bold;
+            color: #1da1f2;
+            text-align: left;">${reply.replyName}:</strong>${reply.replyMessage}</p>
+                    
+                `;
+                repliesContainer.appendChild(replyElement);
+            });
+        }
+
+        // Initial display of posts
+        displayPosts();
+    </script>
+</body>
+</html>

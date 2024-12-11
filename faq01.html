@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hospitar - FAQs</title>
+    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  /*font-family: "Roboto", sans-serif;*/
+}
+/*navbar mariem*/
+.navbar{
+    background: #35848a; 
+    font-family:'Times New Roman';
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index:1000;
+}
+.navdiv{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1200px;  
+}
+.logo a{
+    color:white;
+    font-family: pacifico;
+    font-weight: bold;
+    font-size: 25px;
+    text-shadow:0 0 15px whitesmoke;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.logo a:hover{
+    font-size: 27px;
+}
+li{
+    list-style: none; 
+    display:inline-block ;
+}
+li a{
+    color:white; 
+    font-size: 18px; 
+    font-weight: bold;
+    margin-right: 25px;
+    text-shadow:0 0 15px whitesmoke;
+    text-decoration: none; 
+}
+li a:hover{
+    font-size: 20px;
+    
+}
+
+/*navbar deco end*/
+.wrapper {
+  max-width: 75%;
+  margin: 100px auto;
+}
+
+.wrapper > p,
+.wrapper > h1 {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.wrapper > h1 {
+  letter-spacing: 3px;
+
+}
+
+.accordion {
+  background-color: white;
+  color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  font-size: 1.2rem;
+  width: 100%;
+  padding: 2rem 2.5rem;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.accordion i {
+  font-size: 1.6rem;
+}
+
+.active,
+.accordion:hover {
+  background-color: #f1f7f5;
+}
+.pannel {
+  padding: 0 2rem 2.5rem 2rem;
+  background-color: white;
+  overflow: hidden;
+  background-color: #f1f7f5;
+  display: none;
+}
+.pannel p {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.faq {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 10px 0;
+}
+.faq.active {
+  border: none;
+}
+.report-button {
+    background-color: #f44336; /* Red background */
+    padding: 8px 15px; /* Smaller padding to match other links */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.report-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+    transform: scale(1.05); /* Slightly enlarge */
+}
+    </style>
+  </head>
+  <body>
+    <!--navbar-->
+<nav class="navbar">
+    <div class="navdiv">
+        <div class="logo">
+            <a href="home.html">Hospitar</a>
+        </div>
+        <ul>
+            <li><a href="home01.html">Accueil</a></li>
+            <li><a href="analyse01.html">Analyses</a></li>
+            <li><a href="donation01.html">Don</a></li>
+            <li><a href="faq01.html">FAQs</a></li>
+            <li><a class="report-button" href="mailto:your-email@example.com?subject=Issue Report">Report</a>
+        </ul>
+    </div>
+  </nav>
+  <!--navbar end-->
+    <div class="wrapper">
+      <h1>Frequently Asked Questions</h1>
+
+      <div class="faq">
+        <button class="accordion">
+          Qu'est-ce que Hospitar ?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="pannel">
+          <p>Hospitar est une plateforme innovante conçue pour simplifier 
+            l'accès aux services de santé et encourager la solidarité communautaire. 
+            Notre plateforme permet aux utilisateurs de prendre des rendez-vous médicaux en ligne, 
+            de suivre les temps d'attente et d'accéder à leurs résultats d'analyses depuis chez eux. De plus, 
+            Hospitar offre la possibilité de donner ou demander des médicaments
+             inutilisés de manière sécurisée. En alliant technologie et entraide communautaire, Hospitar vise à 
+             améliorer l'accès aux soins et à créer un réseau d'entraide pour répondre aux besoins de chacun.</p>
+        </div>
+      </div>
+
+      <div class="faq">
+        <button class="accordion">
+          Comment puis-je prendre rendez-vous via Hospitar ?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="pannel">
+          <p>
+            Pour prendre un rendez-vous, accédez à la page d'accueil et sélectionnez 
+            le domaine médical souhaité ainsi que votre localisation. Ensuite, suivez les étapes pour confirmer votre rendez-vous.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq">
+        <button class="accordion">
+          Comment publier une annonce pour donner ou demander des médicaments ?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="pannel">
+          <p>
+            Pour publier une annonce, cliquez sur le bouton "Publier une Annonce" situé dans la barre de navigation. 
+            Remplissez le formulaire en précisant le type d'annonce (don ou demande), vos coordonnées, 
+            et les détails concernant le médicament. Une fois validée, l’annonce sera visible dans la section dédiée.
+          </p>
+        </div>
+      </div>
+      <div class="faq">
+        <button class="accordion">
+          Comment puis-je accéder aux résultats de mes analyses médicales sur Hospitar ?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="pannel">
+          <p>
+            Pour accéder à vos résultats, 
+            connectez-vous à votre compte Hospitar et rendez-vous dans la section "Analyses".
+             Entrez les informations demandées, telles que le numéro de dossier ou la référence donnée par le laboratoire. 
+             Vos résultats seront disponibles en toute sécurité et vous pourrez les télécharger si nécessaire.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+
+
+
+
+
+
+
+
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          this.parentElement.classList.toggle("active");
+
+          var pannel = this.nextElementSibling;
+
+          if (pannel.style.display === "block") {
+            pannel.style.display = "none";
+          } else {
+            pannel.style.display = "block";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
