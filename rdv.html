@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="test.css">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
-        
-        body{background: url('rdv.jpg') no-repeat center center fixed;
-            /* Image de fond */
-            background-size: cover;}
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('rdv.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
     </style>
 </head>
 <body>
@@ -30,47 +32,76 @@
     </header>
     <main>
         <section class="container">
-        <h3>Remplir cette formulaire pour prendre un rendez-vous</h3>
-        <form action="/submit" method="POST">
-            <label for="Nom">Nom</label>
-            <input type="text" id="Nom" name="Nom" placeholder="Entrez votre nom..." />
+            <h3>Remplir cette formulaire pour prendre un rendez-vous</h3>
+            <form action="" method="post">
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur..." required />
 
-            <label for="Prenom">Prénom</label>
-            <input type="text" id="Prenom" name="Prenom" placeholder="Entrez votre prénom..." />
+                <label for="Nom">Nom</label>
+                <input type="text" id="Nom" name="Nom" placeholder="Entrez votre nom..." />
 
-            <label for="date_naissance">Date de naissance</label>
-            <input type="date" id="date_naissance" name="date_naissance" />
+                <label for="Prenom">Prénom</label>
+                <input type="text" id="Prenom" name="Prenom" placeholder="Entrez votre prénom..." />
 
-            <label for="num_carnet">Numéro de carnet de traitement</label>
-            <input type="text" id="num_carnet" name="num_carnet" placeholder="Entrer Votre Numéro de Carnet.." />
+                <label for="date_naissance">Date de naissance</label>
+                <input type="date" id="date_naissance" name="date_naissance" />
 
-            <label for="specialty" >Le service Medical</label>
-            <input type="text" id="specialty" name="specialty" readonly >
-               
-           
+                <label for="num_carnet">Numéro de carnet de traitement</label>
+                <input type="text" id="num_carnet" name="num_carnet" placeholder="Entrer Votre Numéro de Carnet.." />
 
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" placeholder="Entrer Votre Email.." required />
-            <label for="desc">Description</label>
-            <input type="text" id="desc" name="desc" placeholder="Ajouter une Description.." />
-            <button type="submit">Envoyer</button>
-            
-        </form>
-    </section>
+                <label for="specialty">Le service Medical</label>
+                <input type="text" id="specialty" name="specialty" readonly />
+
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Entrer Votre Email.." required />
+
+                <label for="desc">Description</label>
+                <input type="text" id="desc" name="desc" placeholder="Ajouter une Description.." />
+
+                <button type="submit" value="submit" id="submit">Envoyer</button>
+            </form>
+        </section>
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+            import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyClTUXS-DwC588L1c78f1wbzFKGpK0c1Gc",
+                authDomain: "registrationform-7fec1.firebaseapp.com",
+                projectId: "registrationform-7fec1",
+                storageBucket: "registrationform-7fec1.firebasestorage.app",
+                messagingSenderId: "802022052684",
+                appId: "1:802022052684:web:1cab0d2d74276139c1b5e9"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            // Get reference to database services
+            const db = getDatabase(app);
+
+            document.getElementById("submit").addEventListener('click', function (e) {
+                e.preventDefault();
+                set(ref(db, 'user/' + document.getElementById("username").value),
+                    {
+                        nom: document.getElementById("Nom").value,
+                        prenom: document.getElementById("Prenom").value,
+                        date_naissance: document.getElementById("date_naissance").value,
+                        num_carnet: document.getElementById("num_carnet").value,
+                        specialty: document.getElementById("specialty").value,
+                        email: document.getElementById("email").value,
+                        desc: document.getElementById("desc").value,
+                    });
+                alert("Demande envoyée avec succès!");
+            })
+        </script>
     </main>
-
     <!-- Footer -->
     <footer>
         <p>&copy; 2024 Hospitar - Tous droits réservés.</p>
     </footer>
-    <script>
-         // Extract the specialty from the URL
-         const urlParams = new URLSearchParams(window.location.search);
-        const specialty = urlParams.get('specialty');
-
-        if (specialty) {
-            document.getElementById('specialty').value = specialty;
-        }
-    </script>
 </body>
 </html>
